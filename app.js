@@ -66,7 +66,7 @@ const StorageService = {
   },
 
   // Create letter
-  createLetter(subject, body, fromUsername, toEmail) {
+  createLetter(subject, body, fromUsername, toEmail, cardImage) {
     const letters = this.getAllLetters();
     const letter = {
       id: Date.now().toString(),
@@ -74,6 +74,7 @@ const StorageService = {
       body,
       from: fromUsername,
       recipientEmail: toEmail,
+      cardImage,
       createdAt: new Date().toLocaleString(),
       read: false
     };
@@ -146,7 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (logoutButton) {
-    logoutButton.addEventListener("click", () => {
+    logoutButton.addEventListener("click", (e) => {
+      e.preventDefault(); // Prevent default link behavior
       StorageService.logout();
       window.location.href = "login.html";
     });
@@ -198,6 +200,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ---=== WRITE LETTER PAGE (index.html) ===---
   const letterForm = document.getElementById("letter-form");
+  const cardImageInput = document.getElementById("card-image-input");
+  const cardPreview = document.getElementById("card-preview");
+  let cardImageData = null;
+
+  if (cardImageInput) {
+    cardImageInput.addEventListener("change", () => {
+      const file = cardImageInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          cardImageData = e.target.result;
+          cardPreview.src = cardImageData;
+          cardPreview.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+
   if (letterForm) {
     letterForm.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -228,9 +249,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const fromUsername = currentUser.username;
 
         // Create the letter
-        StorageService.createLetter(subject, body, fromUsername, recipient.email);
+        StorageService.createLetter(subject, body, fromUsername, recipient.email, cardImageData);
         alert("Letter sent successfully!");
         letterForm.reset();
+        cardPreview.style.display = "none";
         window.location.href = "mailbox.html";
 
       } catch (error) {
@@ -296,6 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ---=== MODAL LOGIC (Mailbox) ===---
   const modal = document.getElementById("letter-modal");
+  const note = document.querySelector(".note");
   const closeBtn = document.getElementById("close-modal");
   const modalSubject = document.getElementById("modal-subject");
   const modalBody = document.getElementById("modal-body");
@@ -303,6 +326,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function openModal(letter) {
     modalSubject.textContent = letter.subject;
     modalBody.textContent = letter.body;
+    if (letter.cardImage) {
+      note.style.backgroundImage = `url(${letter.cardImage})`;
+      note.style.backgroundSize = "cover";
+      note.style.backgroundPosition = "center";
+    } else {
+      note.style.backgroundImage = "url('img/letter.png')";
+      note.style.backgroundSize = "100% 100%";
+    }
     modal.classList.remove("hidden");
   }
 

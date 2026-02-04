@@ -5,11 +5,6 @@
   <meta charset="UTF-8" />
   <title>Write a Letter</title>
   <link rel="stylesheet" href="styles.css" />
-  <script>
-    if (localStorage.getItem("isLoggedIn") !== "true") {
-      window.location.href = "login.html";
-    }
-  </script>
 </head>
 <body>
   <header>
@@ -17,7 +12,7 @@
     <nav>
       <span id="welcome-message" style="margin-right: 20px;"></span>
       <a href="mailbox.html">Go to Mailbox</a>
-      <button id="logout-button">Logout</button>
+      <a href="#" id="logout-button">Logout</a>
     </nav>
   </header>
 
@@ -41,6 +36,12 @@
         </label>
       </div>
 
+      <div class="card-upload">
+        <h3>Attach a Card</h3>
+        <input type="file" id="card-image-input" accept="image/*">
+        <img id="card-preview" class="card-preview" src="#" alt="Card preview" style="display: none;">
+      </div>
+
       <div class="sheet-footer">
         <button type="submit">Send to Mailbox</button>
       </div>
@@ -48,5 +49,28 @@
   </main>
 
   <script src="app.js"></script>
+  <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyD7dXshlVazSu_7oC02TtiPW5ZOydraPkY",
+    authDomain: "letter-delivery.firebaseapp.com",
+    projectId: "letter-delivery",
+    storageBucket: "letter-delivery.firebasestorage.app",
+    messagingSenderId: "486787867144",
+    appId: "1:486787867144:web:dde03ee9200165490be7bd",
+    measurementId: "G-8Y4QDD5EGH"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
 </body>
 </html>

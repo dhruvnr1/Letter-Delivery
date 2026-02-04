@@ -161,6 +161,25 @@ main {
   box-shadow: 0 6px 15px rgba(255, 111, 145, 0.4);
 }
 
+.card-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card-upload input[type="file"] {
+  font-family: 'Caveat', cursive;
+  font-size: 1.2rem;
+}
+
+.card-preview {
+  max-width: 200px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  display: none;
+}
+
 button {
   padding: 0.6rem 2rem;
   border-radius: 999px;
@@ -256,20 +275,12 @@ button:hover {
 .note h2 {
   margin-top: 0;
   font-size: 2rem;
-  border-bottom: 2px dashed #ffb6c1;
   padding-bottom: 0.5rem;
 }
 
 .note p {
   font-size: 1.5rem;
   line-height: 1.5;
-}
-
-.note .flower {
-  position: absolute;
-  right: 15px;
-  bottom: 15px;
-  font-size: 2rem;
 }
 
 .close-btn {

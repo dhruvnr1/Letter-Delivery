@@ -1,0 +1,379 @@
+/* 1. IMPORT HANDWRITING FONT */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+
+/* --- Base Layout --- */
+body {
+  /* Standardized to Caveat handwriting font */
+  font-family: 'Caveat', cursive; 
+  margin: 0;
+  background-color: #fff9f9;
+  /* Flower background for the whole page */
+  background-image: url("img/background.png"); 
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  min-height: 100vh;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+header {
+  padding: 1rem 2rem;
+  background: rgba(255, 182, 193, 0.95);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+header a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.3rem;
+  margin-right: 30px; /* Increased spacing */
+  transition: font-size 0.2s ease; /* Added transition for smooth effect */
+}
+
+header a:hover {
+  font-size: 1.45rem; /* Slightly bigger on hover */
+}
+
+/* Added spacing for welcome message */
+#welcome-message {
+  margin-right: 30px; /* Increased spacing */
+}
+
+/* Logout button styling */
+#logout-button {
+  background: none;
+  border: none;
+  color: #333;
+  font-family: 'Caveat', cursive;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  box-shadow: none;
+  transform: none;
+  transition: font-size 0.2s ease; /* Added transition for smooth effect */
+}
+
+#logout-button:hover {
+  font-size: 1.45rem; /* Slightly bigger on hover */
+}
+
+main {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* --- The Paper Form Styling --- */
+
+#letter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* Padding keeps text inside the "printable" area of your letter.png */
+  padding: 4rem; 
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  
+  /* Background Image Logic */
+  background-image: url("img/letter.png"); 
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%; /* Forces image to fit form bounds exactly */
+  
+  min-height: 700px; /* High min-height keeps the paper shape consistent */
+}
+
+/* Transparent Handwriting Inputs */
+.sheet-subject, 
+.paper-textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.05); /* Faint guide line */
+  font-family: 'Caveat', cursive;
+  font-size: 1.6rem;
+  outline: none;
+  resize: none;
+  color: #333;
+  line-height: 1.4;
+}
+
+.sheet-subject:focus,
+.paper-textarea:focus {
+    outline: none;
+}
+
+.sheet-header label, .paper-label {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #888;
+  margin-bottom: 0.2rem;
+}
+
+#clear-mailbox-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+/* Pushes button to the very bottom of the form */
+.sheet-footer {
+  margin-top: auto; 
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sheet-footer a {
+  /* Existing styles */
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease; /* Changed to 'all' for smooth background and shadow transition */
+  margin-right: auto; /* Pushes the button to the right */
+  
+  /* Button-like styles */
+  padding: 0.6rem 2rem;
+  border-radius: 999px;
+  border: none;
+  background: #ff6f91; /* Pink background */
+  color: rgb(255, 255, 255); /* White font */
+  font-family: 'Caveat', cursive;
+  font-size: 1.4rem; /* Match button font size */
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(255, 111, 145, 0.3);
+}
+
+.sheet-footer a:hover {
+  transform: translateY(-2px);
+  background: #ff5e84; /* Darker pink on hover */
+  box-shadow: 0 6px 15px rgba(255, 111, 145, 0.4);
+}
+
+button {
+  padding: 0.6rem 2rem;
+  border-radius: 999px;
+  border: none;
+  background: #ff6f91;
+  color: white;
+  font-family: 'Caveat', cursive;
+  font-size: 1.4rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(255, 111, 145, 0.3);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  background: #ff5e84;
+  box-shadow: 0 6px 15px rgba(255, 111, 145, 0.4);
+}
+
+/* --- Mailbox Grid & Centered Subject Preview --- */
+
+.mailbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 2.5rem;
+  padding: 2rem 0;
+}
+
+.envelope-card {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers items horizontally */
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.envelope-card:hover {
+  transform: scale(1.05);
+}
+
+.envelope-image {
+  width: 150px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+}
+
+.card-meta {
+  margin-top: 1rem;
+  font-family: 'Caveat', cursive;
+  font-size: 1.5rem; /* Bigger subject preview */
+  font-weight: 600;
+  color: #444;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* --- Modal & Note View --- */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.note {
+  width: 420px;
+  height: 300px;
+  background: #fff;
+  background-image: radial-gradient(#eee 1px, transparent 1px);
+  background-size: 20px 20px; /* Subtle graph/paper pattern */
+  border-radius: 4px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  padding: 2.5rem;
+  position: relative;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.note h2 {
+  margin-top: 0;
+  font-size: 2rem;
+  border-bottom: 2px dashed #ffb6c1;
+  padding-bottom: 0.5rem;
+}
+
+.note p {
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+
+.note .flower {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  font-size: 2rem;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ffb6c1;
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.close-btn:hover {
+  background: #ff6f91;
+  color: white;
+}
+
+/* --- Responsive Layout --- */
+
+@media (max-width: 600px) {
+  #letter-form, #login-form {
+    padding: 2.5rem;
+    min-height: 500px;
+  }
+  
+  .note {
+    width: 90vw;
+    height: 70vw;
+    padding: 1.5rem;
+  }
+
+  .envelope-image {
+    width: 120px;
+  }
+}
+
+#login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 4rem; 
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  background-image: url("img/loginCard.png"); 
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  min-height: 400px;
+}
+
+#logout-button {
+  background: none;
+  border: none;
+  color: #333;
+  font-family: 'Caveat', cursive;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  box-shadow: none;
+  transform: none;
+  transition: none;
+}
+
+#signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 4rem; 
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  background-image: url("img/signUp.png"); 
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  min-height: 400px;
+}
+
+#clear-mailbox-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 0.6rem 2rem;
+    border-radius: 999px;
+    border: none;
+    background: #ff6f91;
+    color: white;
+    font-family: 'Caveat', cursive;
+    font-size: 1.4rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(255, 111, 145, 0.3);
+}
+
+#clear-mailbox-button:hover {
+    transform: translateY(-2px);
+    background: #ff5e84;
+    box-shadow: 0 6px 15px rgba(255, 111, 145, 0.4);
+}

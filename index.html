@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+<head>
+  <meta charset="UTF-8" />
+  <title>Write a Letter</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Write a Letter</h1>
+    <nav>
+      <span id="welcome-message" style="margin-right: 20px;"></span>
+      <a href="mailbox.html">Go to Mailbox</a>
+      <button id="logout-button">Logout</button>
+    </nav>
+  </header>
+
+  <main>
+    <form id="letter-form" class="paper-sheet">
+      <div class="sheet-header">
+        <label>
+          Subject
+          <input type="text" id="subject" class="sheet-subject" placeholder="Enter subject..." required />
+        </label>
+        <label>
+          To:
+          <input type="text" id="recipient" class="sheet-subject" placeholder="Enter username..." />
+        </label>
+      </div>
+
+      <div class="sheet-body">
+        <label class="paper-label">
+          Message
+          <textarea id="body" class="paper-textarea" rows="12" placeholder="Start writing..." required></textarea>
+        </label>
+      </div>
+
+      <div class="sheet-footer">
+        <button type="submit">Send to Mailbox</button>
+      </div>
+    </form>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

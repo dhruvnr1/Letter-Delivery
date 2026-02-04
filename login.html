@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Mailbox Login</h1>
+    </header>
+    <main>
+        <form id="login-form" class="paper-sheet">
+            <div class="sheet-header">
+                <label>
+                    Email
+                    <input type="email" id="email" class="sheet-subject" placeholder="Enter your email..." required />
+                </label>
+            </div>
+            <div class="sheet-body">
+                <label class="paper-label">
+                    Password
+                    <input type="password" id="password" class="sheet-subject" placeholder="Enter password..." required />
+                </label>
+            </div>
+            <div class="sheet-footer">
+                <a href="signup.html" style="margin-right: auto; color: #333; text-decoration: none;">Sign Up</a>
+                <button type="submit">Login</button>
+            </div>
+        </form>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>
